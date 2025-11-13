@@ -1,0 +1,5 @@
+{
+  "name": " Digital Identity Vault",
+  "description": "A decentralized digital identity management system that allows users to own and control their identity documents using a simulated blockchain, IPFS storage, and AI-powered security analysis.",
+  "requestFramePermissions": []
+}
