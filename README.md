@@ -48,7 +48,7 @@ The local development experience will accurately mimic the production environmen
 2.  **Connect to Netlify:** Log in to your Netlify account and select "Add new site" -> "Import an existing project".
 3.  **Authorize and Select Repo:** Connect to your Git provider and choose the repository for this project.
 4.  **Configure Build Settings:** Netlify will automatically detect and apply the settings from the `netlify.toml` file.
-5.  **Add Environment Variable:** In the site's settings, go to "Build & deploy" -> "Environment" and add your `API_KEY` with its value. This is crucial for your AI features to work in production.
+5.  **Add Environment Variable:** In the site's settings, go to "Site configuration" > "Environment variables" and add your `API_KEY` with its value. This is crucial for your AI features to work in production.
 6.  **Deploy:** Click "Deploy site". Netlify will build your frontend and deploy your serverless function.
 
 ## How It Works

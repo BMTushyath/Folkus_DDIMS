@@ -6,7 +6,7 @@
     "frontend"
   ],
   "scripts": {
-    "dev": "npm run dev --workspace=frontend",
+    "dev": "netlify dev",
     "build": "npm run build --workspace=frontend"
   },
   "dependencies": {
@@ -15,5 +15,8 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "serverless-http": "^3.2.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.16.2"
   }
 }

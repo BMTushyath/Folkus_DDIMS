@@ -2,33 +2,38 @@ const express = require('express');
 const cors = require('cors');
 const { GoogleGenAI } = require('@google/genai');
 const serverless = require('serverless-http');
-require('dotenv/config');
 
 const app = express();
+const router = express.Router();
 
 app.use(cors());
 app.use(express.json());
 
 // --- Gemini AI Setup ---
 const API_KEY = process.env.API_KEY;
-if (!API_KEY) {
-  // This won't throw an error during build but will cause runtime errors if the key isn't set.
-  // Netlify's build process sets env vars, but for safety, we log an error.
-  console.error("Gemini API key not found. Please set the API_KEY environment variable.");
+
+// We create the AI instance inside the handler to ensure it uses the most recent API_KEY,
+// especially in a serverless environment where environment variables can be updated.
+let ai;
+if (API_KEY) {
+  ai = new GoogleGenAI({ apiKey: API_KEY });
+} else {
+  console.error("Gemini API key not found. Please set the API_KEY environment variable in your Netlify settings.");
 }
-const ai = new GoogleGenAI({ apiKey: API_KEY });
 
 
 // --- API Routes ---
-// The /api prefix is handled by Netlify's rewrite rule.
-// A request to /api/audit is routed to this function, and Express sees the path as /audit.
-app.post('/audit', async (req, res) => {
+// Note: The base path is `/api/` which is configured in netlify.toml and handled by serverless-http.
+// So, a request to /api/audit will be handled by router.post('/audit', ...).
+
+router.post('/audit', async (req, res) => {
+  if (!ai) {
+    return res.status(500).json({ error: 'The AI service is not configured on the server.' });
+  }
+
   const { query } = req.body;
   if (!query) {
     return res.status(400).json({ error: 'Query is required.' });
-  }
-  if (!API_KEY) {
-    return res.status(500).json({ error: 'Server is not configured with an API key.' });
   }
 
   const model = "gemini-2.5-flash";
@@ -60,13 +65,14 @@ app.post('/audit', async (req, res) => {
   }
 });
 
-app.post('/translate', async (req, res) => {
+router.post('/translate', async (req, res) => {
+  if (!ai) {
+    return res.status(500).json({ error: 'The AI service is not configured on the server.' });
+  }
+
   const { text, language } = req.body;
   if (!text || !language) {
     return res.status(400).json({ error: 'Text and language are required.' });
-  }
-   if (!API_KEY) {
-    return res.status(500).json({ error: 'Server is not configured with an API key.' });
   }
 
   const model = "gemini-2.5-flash";
@@ -93,5 +99,6 @@ app.post('/translate', async (req, res) => {
   }
 });
 
+app.use('/.netlify/functions/api', router);
 
 module.exports.handler = serverless(app);
