@@ -33,3 +33,29 @@ export async function analyzeWithGemini(userInput: string): Promise<string> {
     throw new Error("Failed to communicate with the Gemini API.");
   }
 }
+
+export async function translateText(text: string, language: string): Promise<string> {
+  try {
+    const model = "gemini-2.5-flash";
+    const prompt = `
+      Translate the following security analysis report into ${language}.
+      It is critical that you PRESERVE THE ORIGINAL STRUCTURE AND EXACT ENGLISH LABELS ("Risk Level:", "Summary:", "Analysis:", "Recommendation:").
+      Only translate the content that follows these labels.
+
+      Report to translate:
+      ---
+      ${text}
+      ---
+    `;
+    
+    const response = await ai.models.generateContent({
+      model: model,
+      contents: prompt,
+    });
+
+    return response.text;
+  } catch (error) {
+    console.error("Error calling Gemini API for translation:", error);
+    throw new Error("Failed to communicate with the Gemini API for translation.");
+  }
+}
