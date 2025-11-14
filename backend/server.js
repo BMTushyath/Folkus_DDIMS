@@ -141,7 +141,6 @@ app.post('/api/translate', async (req, res) => {
   }
 });
 
-
 app.listen(port, () => {
   console.log(`Backend server listening on http://localhost:${port}`);
 });
