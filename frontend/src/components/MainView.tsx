@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Header } from './Header';
 import { DocumentManager } from './DocumentManager';

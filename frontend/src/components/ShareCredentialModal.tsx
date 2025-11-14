@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Credential, Document } from '../types';
 import { XIcon, ClipboardCopyIcon } from './IconComponents';

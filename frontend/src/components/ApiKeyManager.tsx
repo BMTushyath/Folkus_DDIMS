@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { ApiKey } from '../types';
 import { ClipboardCopyIcon, KeyIcon, TrashIcon } from './IconComponents';

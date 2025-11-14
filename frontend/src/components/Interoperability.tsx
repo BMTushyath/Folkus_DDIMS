@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Credential, Document, ServiceProvider, Connection } from '../types';
 import { BuildingLibraryIcon, ShoppingBagIcon, XIcon, CheckCircleIcon, ShareIcon } from './IconComponents';

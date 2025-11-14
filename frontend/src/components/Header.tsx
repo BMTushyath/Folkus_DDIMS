@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { WalletConnect } from './WalletConnect';
 import { LockClosedIcon } from './IconComponents';

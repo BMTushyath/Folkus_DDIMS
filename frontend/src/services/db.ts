@@ -1,4 +1,3 @@
-
 import { User, Document, Credential } from '../types';
 
 const DB_KEY = 'digital_identity_vault_users';

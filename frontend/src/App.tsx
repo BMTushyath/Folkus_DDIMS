@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback, useEffect } from 'react';
 import { Document, Heir, User, Credential } from './types';
 import { LoginView } from './components/LoginView';

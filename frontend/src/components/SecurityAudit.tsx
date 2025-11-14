@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { analyzeWithGemini, translateText } from '../services/geminiService';
 import { SparklesIcon, ExclamationTriangleIcon } from './IconComponents';

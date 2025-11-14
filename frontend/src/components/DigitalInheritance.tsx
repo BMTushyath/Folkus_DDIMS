@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Heir } from '../types';
 import { UserCircleIcon, UsersIcon, UserPlusIcon } from './IconComponents';
